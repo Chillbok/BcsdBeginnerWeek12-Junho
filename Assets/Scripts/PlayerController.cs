@@ -3,28 +3,93 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //스피드 조정 변수
     [SerializeField] private float walkSpeed; //걷는 속도
+    [SerializeField] private float runSpeed; //뛰는 속도
+    [SerializeField] private float applySpeed; //실제로 속도로 적용되는 변수
+
+    [SerializeField] private float jumpForce; //점프 힘
+
+    //상태 변수
+    private bool isRun = false; //뛰는 중인가?
+    private bool isGround = true; //땅에 있는가?
+
+    //땅 착지 여부 확인을 위한 컴포넌트
+    private CapsuleCollider capsuleCollider;
+
+    //민감도
     [SerializeField] private float lookSensitivity; //마우스 시야 민감도
+
+    //카메라 한계
     [SerializeField] private float cameraRotationLimit; //화면 위로 올렸을 때 최대 시야각
     private float currentCameraRotationX = 0f; //카메라 x축 회전
 
+    //필요한 컴포넌트
     [SerializeField] private Camera theCamera;
     private Rigidbody myRigid;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //플레이어 오브젝트의 하위 자식 중 카메라는 하나밖에 없을 것이므로, 그냥 이렇게 사용하자
-        theCamera = GetComponentInChildren<Camera>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
+        applySpeed = walkSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        IsGround();
+        TryJump();
+        TryRun();
         Move();
         CameraRotation();
         CharacterRotation();
+    }
+
+    private void TryJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        {
+            Jump();
+        }
+    }
+
+    private void IsGround()
+    {
+        //아래 방향으로 콜라이더 크기보다 0.1f만큼 더 길게 Ray 발사, collider와 닿으면 true 반환
+        isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
+    }
+
+    private void Jump()
+    {
+        myRigid.linearVelocity = transform.up * jumpForce;
+    }
+
+    private void TryRun()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Running();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            RunningCancel();
+        }
+    }
+
+    //달리기 시작 
+    private void Running()
+    {
+        isRun = true;
+        applySpeed = runSpeed;
+    }
+
+    //달리기 끝
+    private void RunningCancel()
+    {
+        isRun = false;
+        applySpeed = walkSpeed;
     }
 
     private void Move()
@@ -39,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
         //두개 합치고, 이동 속도 곱하기
         //normailze로 정규화
-        Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed;
+        Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * applySpeed;
 
         //캐릭터 위치 변화
         myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
