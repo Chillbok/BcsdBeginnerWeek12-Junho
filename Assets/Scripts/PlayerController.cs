@@ -152,6 +152,9 @@ public class PlayerController : MonoBehaviour
     //달리기 실행
     private void Running()
     {
+        //앉은 상태에서 달리기 시작하면 서 있는 상태로 변경
+        if (isCrouch)
+            Crouch();
         isRun = true;
         applySpeed = runSpeed;
     }
