@@ -6,13 +6,21 @@ public class PlayerController : MonoBehaviour
     //스피드 조정 변수
     [SerializeField] private float walkSpeed; //걷는 속도
     [SerializeField] private float runSpeed; //뛰는 속도
-    [SerializeField] private float applySpeed; //실제로 속도로 적용되는 변수
+    [SerializeField] private float crouchSpeed; //앉았을 때 속도
+    private float applySpeed; //실제로 속도로 적용되는 변수
 
-    [SerializeField] private float jumpForce; //점프 힘
+    [SerializeField] private float jumpForce; //점프 힘수
 
     //상태 변수
     private bool isRun = false; //뛰는 중인가?
+    private bool isCrouch = false; //앉아있는가?
     private bool isGround = true; //땅에 있는가?
+
+    //앉았을 때 얼마나 앉을지 결정하는 변수
+    [SerializeField]
+    private float crouchPosY;
+    private float originPosY; //카메라 위치
+    private float applyCrouchPosY;
 
     //땅 착지 여부 확인을 위한 컴포넌트
     private CapsuleCollider capsuleCollider;
@@ -34,17 +42,47 @@ public class PlayerController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
         applySpeed = walkSpeed;
+        originPosY = theCamera.transform.localPosition.y; //상위 오브젝트 기준 위치
+        applyCrouchPosY = originPosY; //적용할 카메라 높이 초기화
     }
 
-    // Update is called once per frame
     void Update()
     {
         IsGround();
         TryJump();
         TryRun();
+        TryCrouch();
         Move();
         CameraRotation();
         CharacterRotation();
+    }
+
+    private void TryCrouch()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Crouch();
+        }
+    }
+
+    private void Crouch()
+    {
+        //메서드가 실행될 때마다 반전시키기
+        //true면 false로, false면 true로
+        isCrouch = !isCrouch;
+
+        if (isCrouch)
+        {
+            applySpeed = crouchSpeed;
+            applyCrouchPosY = crouchPosY;
+        }
+        else
+        {
+            applySpeed = walkSpeed;
+            applyCrouchPosY = originPosY;
+        }
+
+        theCamera.transform.localPosition = new Vector3(theCamera.transform.localPosition.x, applyCrouchPosY, theCamera.transform.localPosition.z);
     }
 
     private void TryJump()
