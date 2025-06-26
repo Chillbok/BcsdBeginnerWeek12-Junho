@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
         applySpeed = walkSpeed;
+
+        //초기화
         originPosY = theCamera.transform.localPosition.y; //상위 오브젝트 기준 위치
         applyCrouchPosY = originPosY; //적용할 카메라 높이 초기화
     }
@@ -58,14 +60,16 @@ public class PlayerController : MonoBehaviour
         CharacterRotation();
     }
 
+    //앉기 시도
     private void TryCrouch()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Crouch();
         }
-    }
+}
 
+    //앉기 동작
     private void Crouch()
     {
         //메서드가 실행될 때마다 반전시키기
@@ -87,6 +91,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //앉기 시 자연스러운 카메라 이동을 구현하기 위한 코루틴
+    //부드러운 앉기 동작 실행
     IEnumerator CrouchCoroutine()
     {
         float _posY = theCamera.transform.localPosition.y;
@@ -106,6 +111,14 @@ public class PlayerController : MonoBehaviour
         theCamera.transform.localPosition = new Vector3(0, applyCrouchPosY, 0);
     }
 
+    //지면 체크
+    private void IsGround()
+    {
+        //아래 방향으로 콜라이더 크기보다 0.1f만큼 더 길게 Ray 발사, collider와 닿으면 true 반환
+        isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
+    }
+
+    //점프 시도
     private void TryJump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
@@ -114,12 +127,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void IsGround()
-    {
-        //아래 방향으로 콜라이더 크기보다 0.1f만큼 더 길게 Ray 발사, collider와 닿으면 true 반환
-        isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
-    }
-
+    //점프
     private void Jump()
     {
         //앉은 상태에서 점프하면 서 있는 상태로 변경
@@ -128,6 +136,7 @@ public class PlayerController : MonoBehaviour
         myRigid.linearVelocity = transform.up * jumpForce;
     }
 
+    //달리기 시도
     private void TryRun()
     {
         if (Input.GetKey(KeyCode.LeftShift))
@@ -140,20 +149,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //달리기 시작 
+    //달리기 실행
     private void Running()
     {
         isRun = true;
         applySpeed = runSpeed;
     }
 
-    //달리기 끝
+    //달리기 취소
     private void RunningCancel()
     {
         isRun = false;
         applySpeed = walkSpeed;
     }
 
+    //움직임 실행
     private void Move()
     {
         //인풋값 변수 생성
