@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -82,7 +83,27 @@ public class PlayerController : MonoBehaviour
             applyCrouchPosY = originPosY;
         }
 
-        theCamera.transform.localPosition = new Vector3(theCamera.transform.localPosition.x, applyCrouchPosY, theCamera.transform.localPosition.z);
+        StartCoroutine(CrouchCoroutine());
+    }
+
+    //앉기 시 자연스러운 카메라 이동을 구현하기 위한 코루틴
+    IEnumerator CrouchCoroutine()
+    {
+        float _posY = theCamera.transform.localPosition.y;
+        int count = 0;
+
+        while (_posY != applyCrouchPosY)
+        {
+            count++;
+            _posY = Mathf.Lerp(_posY, applyCrouchPosY, 0.3f);
+            theCamera.transform.localPosition = new Vector3(0, _posY, 0);
+            //15번 실행하면 그냥 반복문 끝내기
+            if (count > 15)
+                break;
+            yield return null;
+        }
+        //카메라 높이 조절하기
+        theCamera.transform.localPosition = new Vector3(0, applyCrouchPosY, 0);
     }
 
     private void TryJump()
@@ -101,6 +122,8 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        if (isCrouch)
+            Crouch();
         myRigid.linearVelocity = transform.up * jumpForce;
     }
 
