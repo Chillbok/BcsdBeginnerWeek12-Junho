@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        //점프하면 앉은 상태에서 서 있는 상태로 변경
         if (isCrouch)
             Crouch();
         myRigid.linearVelocity = transform.up * jumpForce;
