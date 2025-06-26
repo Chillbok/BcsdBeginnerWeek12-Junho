@@ -663,7 +663,7 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 10
   crouchSpeed: 1.5
-  jumpForce: 15
+  jumpForce: 5
   crouchPosY: 0
   lookSensitivity: 1
   cameraRotationLimit: 45
