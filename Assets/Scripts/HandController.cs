@@ -12,11 +12,6 @@ public class HandController : MonoBehaviour
 
     private RaycastHit hitInfo;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         TryAttack();
@@ -50,7 +45,6 @@ public class HandController : MonoBehaviour
         isSwing = false;
 
         yield return new WaitForSeconds(currentHand.attackDelay - currentHand.attackDelayA - currentHand.attackDelayB);
-
         isAttack = false; //공격 종료
     }
 
