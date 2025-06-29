@@ -63,8 +63,8 @@ public class GunController : MonoBehaviour
             isReload = true; //재장전 할 때 총 못 쏘게 하기 위함
             currentGun.anim.SetTrigger("Reload"); //재장전 애니메이션 활성화
 
-            currentGun.carryBulletCount += currentGun.currentBulletCount;
-            currentGun.currentBulletCount -= currentGun.reloadBulletCount; 
+            currentGun.carryBulletCount += currentGun.currentBulletCount; //현재 소유한 총알 개수와 탄창 총알 개수 더하기
+            currentGun.currentBulletCount = 0; //탄창 총알 비우기
 
             yield return new WaitForSeconds(currentGun.reloadTime); //재장전 시간동안 기다리기
 
