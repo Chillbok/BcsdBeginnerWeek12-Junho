@@ -18,8 +18,9 @@ public class GunController : MonoBehaviour
 
     void Update()
     {
-        GunFireRateCalc();
-        TryFire();
+        GunFireRateCalc(); //발사 속도 계산
+        TryFire(); //탄창에 총알 있으면 사격, 총알 없으면 재장전
+        TryReload(); //직접 재장전 시도
     }
 
     private void GunFireRateCalc() //발사 속도 계산용
@@ -56,9 +57,17 @@ public class GunController : MonoBehaviour
         Debug.Log("총알 발사");
     }
 
+    private void TryReload() //탄창이 안 비어도 직접 재장전
+    {
+        if (Input.GetKeyDown(KeyCode.R) /*R 눌렀을 때*/ && !isReload /*재장전 중이 아닐 때*/ && currentGun.currentBulletCount < currentGun.reloadBulletCount /*현재 총알 개수가 탄창 크기보다 작을 때*/)
+        {
+            StartCoroutine(ReloadCoroutine()); //재장전 시작
+        }
+    }
+
     IEnumerator ReloadCoroutine() //재장전 코루틴
     {
-        if (currentGun.carryBulletCount > 0)
+        if (currentGun.carryBulletCount > 0) //소유한 총알 있음
         {
             isReload = true; //재장전 할 때 총 못 쏘게 하기 위함
             currentGun.anim.SetTrigger("Reload"); //재장전 애니메이션 활성화
@@ -81,6 +90,10 @@ public class GunController : MonoBehaviour
             }
 
             isReload = false; //재장전 끝남
+        }
+        else //총알이 없음
+        {
+            Debug.Log("소유한 총알이 없습니다.");
         }
     }
 
