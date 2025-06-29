@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGun: {fileID: 138081950}
+  originPos: {x: 0, y: 0, z: 0}
 --- !u!82 &75517790
 AudioSource:
   m_ObjectHideFlags: 0
@@ -369,7 +370,7 @@ MonoBehaviour:
   carryBulletCount: 23
   retroActionForce: 0
   retroActionFineSightForce: 0
-  fineSightOriginPos: {x: 0, y: 0, z: 0}
+  fineSightOriginPos: {x: 0.5, y: 0.335, z: -0.585}
   anim: {fileID: 138081951}
   muzzleFlash: {fileID: 1071705363}
   fire_Sound: {fileID: 8300000, guid: df8091a5b822caab0b3ec5cbca909f05, type: 3}

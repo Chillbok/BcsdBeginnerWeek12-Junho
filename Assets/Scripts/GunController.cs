@@ -1,13 +1,16 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GunController : MonoBehaviour
 {
     [SerializeField] private Gun currentGun;
 
     private float currentFireRate; //현재 연사 속도. 1초에 1씩 감소하고 0이 되면 발사
-
     private bool isReload = false; //재장전 중인가?
+    private bool isFineSightMode = false; //정조준 여부
+
+    [SerializeField] private Vector3 originPos; //본래 포지션 값
 
     private AudioSource audioSource;
 
@@ -21,6 +24,7 @@ public class GunController : MonoBehaviour
         GunFireRateCalc(); //발사 속도 계산
         TryFire(); //탄창에 총알 있으면 사격, 총알 없으면 재장전
         TryReload(); //직접 재장전 시도
+        TryFineSight(); //정조준 여부 확랴ㅜ
     }
 
     private void GunFireRateCalc() //발사 속도 계산용
@@ -94,6 +98,48 @@ public class GunController : MonoBehaviour
         else //총알이 없음
         {
             Debug.Log("소유한 총알이 없습니다.");
+        }
+    }
+
+    private void TryFineSight() //정조준 시도
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            FineSight();
+        }
+    }
+
+    private void FineSight()
+    {
+        isFineSightMode = !isFineSightMode; //정조준 활성화
+        currentGun.anim.SetBool("FineSightMode", isFineSightMode);
+        if (isFineSightMode) //정조준 중일 때
+        {
+            StopAllCoroutines(); //기존 실행중인 모든 코루틴 멈춤
+            StartCoroutine(FineSightActivateCoroutine()); //정조준 시작
+        }
+        else //정조준 아닐 때
+        {
+            StopAllCoroutines(); //기존 실행중인 모든 코루틴 멈춤
+            StartCoroutine(FineSightDeactivateCoroutine()); //비조준 시작
+        }
+    }
+
+    IEnumerator FineSightActivateCoroutine() //정조준 작동용 코루틴
+    {
+        while (currentGun.transform.localPosition != currentGun.fineSightOriginPos) //정조준 자세가 될 때까지 무한반복
+        {
+            currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, currentGun.fineSightOriginPos, 0.2f);
+            yield return null;
+        }
+    }
+
+    IEnumerator FineSightDeactivateCoroutine() //비조준 작동용 코루틴
+    {
+        while (currentGun.transform.localPosition != originPos) //비조준 자세가 될 때까지 무한반복
+        {
+            currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, originPos, 0.2f);
+            yield return null;
         }
     }
 
