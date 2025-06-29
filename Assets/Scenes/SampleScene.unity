@@ -1337,7 +1337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handName: "\uB9E8\uC190"
-  range: 4
+  range: 3
   damage: 1
   workSpeed: 0
   attackDelay: 1
