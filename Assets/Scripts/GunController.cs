@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GunController : MonoBehaviour
@@ -6,6 +7,7 @@ public class GunController : MonoBehaviour
 
     private float currentFireRate; //현재 연사 속도. 1초에 1씩 감소하고 0이 되면 발사
 
+    private bool isReload = false; //재장전 중인가?
 
     private AudioSource audioSource;
 
@@ -28,7 +30,7 @@ public class GunController : MonoBehaviour
 
     private void TryFire() //발사 시도
     {
-        if (Input.GetButton("Fire1") && currentFireRate <= 0)
+        if (Input.GetButton("Fire1") && currentFireRate <= 0 && !isReload)
         {
             Fire();
         }
@@ -36,10 +38,13 @@ public class GunController : MonoBehaviour
 
     private void Fire() //발사 과정
     {
-        if (currentGun.currentBulletCount > 0) //탄창 총알 개수가 0보다 많으면
-            Shoot(); //총알 발사
-        else //탄창에 총알이 없으면
-            Reload(); //재장전
+        if (!isReload) //재장전 중이 아니라면
+        {
+            if (currentGun.currentBulletCount > 0) //탄창 총알 개수가 0보다 많으면
+                Shoot(); //총알 발사
+            else //탄창에 총알이 없으면
+                StartCoroutine(ReloadCoroutine()); //재장전 코루틴 실행
+        }
     }
 
     private void Shoot() //진짜 총알 쏨
@@ -51,11 +56,14 @@ public class GunController : MonoBehaviour
         Debug.Log("총알 발사");
     }
 
-    private void Reload() //재장전
+    IEnumerator ReloadCoroutine() //재장전 코루틴
     {
         if (currentGun.carryBulletCount > 0)
         {
-            currentGun.anim.SetTrigger("Reload");
+            isReload = true; //재장전 할 때 총 못 쏘게 하기 위함
+            currentGun.anim.SetTrigger("Reload"); //재장전 애니메이션 활성화
+
+            yield return new WaitForSeconds(currentGun.reloadTime); //재장전 시간동안 기다리기
 
             if (currentGun.carryBulletCount >= currentGun.reloadBulletCount) //탄창 크기보다 보유 총알 개수가 많으면
             {
@@ -68,6 +76,8 @@ public class GunController : MonoBehaviour
                 currentGun.currentBulletCount = currentGun.carryBulletCount; //남은 총알 전부 탄창에 넣기
                 currentGun.carryBulletCount = 0; //남은 총알 개수는 0
             }
+
+            isReload = false; //재장전 끝남
         }
     }
 
