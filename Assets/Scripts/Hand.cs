@@ -11,5 +11,4 @@ public class Hand : MonoBehaviour
     public float attackDelayB; //공격 비활성화 시점
 
     public Animator anim; //애니메이터 컨트롤러
-    public BoxCollider boxCollider; //박스 콜라이더
 }

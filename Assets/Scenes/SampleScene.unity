@@ -1132,7 +1132,6 @@ MonoBehaviour:
   attackDelayA: 0.5
   attackDelayB: 0.1
   anim: {fileID: 1631150748}
-  boxCollider: {fileID: 0}
 --- !u!1 &1843311647
 GameObject:
   m_ObjectHideFlags: 0
