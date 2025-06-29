@@ -716,7 +716,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 168526496426680467, guid: d80740ef190c6844c902df669c20ddf6, type: 3}
       propertyPath: m_Name
-      value: lowPoly_arms_Basic
+      value: Hand
       objectReference: {fileID: 0}
     - target: {fileID: 656796948290910761, guid: d80740ef190c6844c902df669c20ddf6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -761,7 +761,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 168526496426680467, guid: d80740ef190c6844c902df669c20ddf6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1631150748}
   m_SourcePrefab: {fileID: 100100000, guid: d80740ef190c6844c902df669c20ddf6, type: 3}
 --- !u!4 &1321116068 stripped
 Transform:
@@ -1079,6 +1082,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!1 &1631150747 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 168526496426680467, guid: d80740ef190c6844c902df669c20ddf6, type: 3}
+  m_PrefabInstance: {fileID: 1321116067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1631150748
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631150747}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29c37b65d0f8c27469e40ba8a62d7c06, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1843311647
 GameObject:
   m_ObjectHideFlags: 0
