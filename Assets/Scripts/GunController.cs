@@ -36,15 +36,39 @@ public class GunController : MonoBehaviour
 
     private void Fire() //발사 과정
     {
-        currentFireRate = currentGun.fireRate;
-        Shoot(); //총알 발사
+        if (currentGun.currentBulletCount > 0) //탄창 총알 개수가 0보다 많으면
+            Shoot(); //총알 발사
+        else //탄창에 총알이 없으면
+            Reload(); //재장전
     }
 
     private void Shoot() //진짜 총알 쏨
     {
+        currentGun.currentBulletCount--;
+        currentFireRate = currentGun.fireRate; //연사 속도 재계산
         currentGun.muzzleFlash.Play(); //총구 화염 효과 재생
         PlaySE(currentGun.fire_Sound); //발사 소리 출력
         Debug.Log("총알 발사");
+    }
+
+    private void Reload() //재장전
+    {
+        if (currentGun.carryBulletCount > 0)
+        {
+            currentGun.anim.SetTrigger("Reload");
+
+            if (currentGun.carryBulletCount >= currentGun.reloadBulletCount) //탄창 크기보다 보유 총알 개수가 많으면
+            {
+                //탄창의 잔탄은 그냥 버려짐
+                currentGun.currentBulletCount = currentGun.reloadBulletCount; //탄창에 총알 채우기
+                currentGun.carryBulletCount -= currentGun.reloadBulletCount; //보유 총알 개수만큼 빠지기
+            }
+            else //탄창 크기보다 보유 총알 개수가 적으면
+            {
+                currentGun.currentBulletCount = currentGun.carryBulletCount; //남은 총알 전부 탄창에 넣기
+                currentGun.carryBulletCount = 0; //남은 총알 개수는 0
+            }
+        }
     }
 
     private void PlaySE(AudioClip _clip) //특정 오디오클립 재생시키는 메소드
