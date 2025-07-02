@@ -58,6 +58,9 @@ public class GunController : MonoBehaviour
         currentFireRate = currentGun.fireRate; //연사 속도 재계산
         currentGun.muzzleFlash.Play(); //총구 화염 효과 재생
         PlaySE(currentGun.fire_Sound); //발사 소리 출력
+
+        StopAllCoroutines();
+        StartCoroutine(RetroActionCoroutine());
         Debug.Log("총알 발사");
     }
 
@@ -140,6 +143,51 @@ public class GunController : MonoBehaviour
         {
             currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, originPos, 0.2f);
             yield return null;
+        }
+    }
+
+    IEnumerator RetroActionCoroutine() //반동 구현 코루틴
+    {
+        //정조준 안했을 때 최대 반동
+        Vector3 recoilBack = new Vector3(currentGun.retroActionForce, originPos.y, originPos.z); //나머지 값은 그대로, X만 수정해서 반동 구현(앞뒤로 움직임)
+        //정조준 했을 때 최대 반동
+        Vector3 retroActionRecoilBack = new Vector3(currentGun.retroActionFineSightForce, currentGun.fineSightOriginPos.y, currentGun.fineSightOriginPos.z); //마찬가지로 X만 이동, Y, Z는 그대로 유지
+
+        if (!isFineSightMode)
+        {
+            currentGun.transform.localPosition = originPos; //총 위치를 원래대로 돌림
+
+            //반동 시작
+            while (currentGun.transform.localPosition.x <= currentGun.retroActionForce - 0.02f) //계속 반복, 단, 총 현재 위치가 총의 retroActionForce과 대충 일치하면 종료.
+            {
+                currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, recoilBack, 0.4f);
+                yield return null;
+            }
+
+            //원위치
+            while (currentGun.transform.localPosition != originPos) //될때까지 반복
+            {
+                currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, originPos, 0.1f);
+                yield return null;
+            }
+        }
+        else
+        {
+            currentGun.transform.localPosition = currentGun.fineSightOriginPos; //총 위치를 원래대로 돌림
+
+            //반동 시작
+            while (currentGun.transform.localPosition.x <= currentGun.retroActionFineSightForce - 0.02f) //계속 반복, 단, 총 현재 위치가 총의 retroActionForce과 대충 일치하면 종료.
+            {
+                currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, retroActionRecoilBack, 0.4f);
+                yield return null;
+            }
+
+            //원위치
+            while (currentGun.transform.localPosition != originPos) //될때까지 반복
+            {
+                currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, originPos, 0.1f);
+                yield return null;
+            }
         }
     }
 
