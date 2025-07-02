@@ -4,15 +4,17 @@ using UnityEngine.Rendering;
 
 public class GunController : MonoBehaviour
 {
-    [SerializeField] private Gun currentGun;
+    [SerializeField] private Gun currentGun; //현재 장착된 총
 
-    private float currentFireRate; //현재 연사 속도. 1초에 1씩 감소하고 0이 되면 발사
+    private float currentFireRate; //현재 연사 속도 계산. 1초에 1씩 감소하고 0이 되면 발사
+    
+    //상태변수들
     private bool isReload = false; //재장전 중인가?
     private bool isFineSightMode = false; //정조준 여부
 
-    [SerializeField] private Vector3 originPos; //본래 포지션 값
+    private Vector3 originPos; //본래 포지션 값
 
-    private AudioSource audioSource;
+    private AudioSource audioSource; //효과음 재생
 
     void Start()
     {
@@ -27,7 +29,7 @@ public class GunController : MonoBehaviour
         TryFineSight(); //정조준 여부 확랴ㅜ
     }
 
-    private void GunFireRateCalc() //발사 속도 계산용
+    private void GunFireRateCalc() //연사 속도 재계산
     {
         if (currentFireRate > 0)
             currentFireRate -= Time.deltaTime; // 대략 60분의 1 = 1
@@ -41,7 +43,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    private void Fire() //발사 과정
+    private void Fire() //발사 전 계선
     {
         if (!isReload) //재장전 중이 아니라면
         {
@@ -55,7 +57,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    private void Shoot() //진짜 총알 쏨
+    private void Shoot() //발사 후 계산
     {
         currentGun.currentBulletCount--;
         currentFireRate = currentGun.fireRate; //연사 속도 재계산
@@ -67,7 +69,7 @@ public class GunController : MonoBehaviour
         Debug.Log("총알 발사");
     }
 
-    private void TryReload() //탄창이 안 비어도 직접 재장전
+    private void TryReload() //재장전 시도
     {
         if (Input.GetKeyDown(KeyCode.R) /*R 눌렀을 때*/ && !isReload /*재장전 중이 아닐 때*/ && currentGun.currentBulletCount < currentGun.reloadBulletCount /*현재 총알 개수가 탄창 크기보다 작을 때*/)
         {
@@ -76,7 +78,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    IEnumerator ReloadCoroutine() //재장전 코루틴
+    IEnumerator ReloadCoroutine() //재장전 실행
     {
         if (currentGun.carryBulletCount > 0) //소유한 총알 있음
         {
@@ -116,13 +118,13 @@ public class GunController : MonoBehaviour
         }
     }
 
-    public void CancelFineSight() //조준 취소
+    public void CancelFineSight() //정조준 취소
     {
         if (isFineSightMode) //조준 중이면
             FineSight();
     }
 
-    private void FineSight()
+    private void FineSight() //정조준 로직 가동
     {
         isFineSightMode = !isFineSightMode; //정조준 활성화
         currentGun.anim.SetBool("FineSightMode", isFineSightMode);
@@ -138,7 +140,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    IEnumerator FineSightActivateCoroutine() //정조준 작동용 코루틴
+    IEnumerator FineSightActivateCoroutine() //정조준 활성화
     {
         while (currentGun.transform.localPosition != currentGun.fineSightOriginPos) //정조준 자세가 될 때까지 무한반복
         {
@@ -147,7 +149,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    IEnumerator FineSightDeactivateCoroutine() //비조준 작동용 코루틴
+    IEnumerator FineSightDeactivateCoroutine() //정조준 비활성화
     {
         while (currentGun.transform.localPosition != originPos) //비조준 자세가 될 때까지 무한반복
         {
@@ -156,7 +158,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    IEnumerator RetroActionCoroutine() //반동 구현 코루틴
+    IEnumerator RetroActionCoroutine() //반동 코루틴
     {
         //정조준 안했을 때 최대 반동
         Vector3 recoilBack = new Vector3(currentGun.retroActionForce, originPos.y, originPos.z); //나머지 값은 그대로, X만 수정해서 반동 구현(앞뒤로 움직임)
@@ -201,7 +203,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    private void PlaySE(AudioClip _clip) //특정 오디오클립 재생시키는 메소드
+    private void PlaySE(AudioClip _clip) //특정 오디오클립 재생
     {
         audioSource.clip = _clip;
         audioSource.Play();
