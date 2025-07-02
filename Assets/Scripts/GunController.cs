@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -9,8 +10,8 @@ public class GunController : MonoBehaviour
     private float currentFireRate; //현재 연사 속도 계산. 1초에 1씩 감소하고 0이 되면 발사
     
     //상태변수들
-    private bool isReload = false; //재장전 중인가?
-    private bool isFineSightMode = false; //정조준 여부
+    [HideInInspector] private bool isReload = false; //재장전 중인가?
+    [HideInInspector] private bool isFineSightMode = false; //정조준 여부
 
     private Vector3 originPos; //본래 포지션 값
 
@@ -19,6 +20,8 @@ public class GunController : MonoBehaviour
     //필요한 컴포넌트
     private RaycastHit hitInfo; //레이저 충돌 정보 받아옴
     [SerializeField] private Camera theCam; //총알 착탄지점 찾기 위함
+
+    [SerializeField] private GameObject hit_effect_prefab; //피격 이펙트
 
     void Start()
     {
@@ -77,7 +80,8 @@ public class GunController : MonoBehaviour
     {
         if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitInfo, currentGun.range))
         {
-            Debug.Log(hitInfo.transform.name);
+            GameObject clone = Instantiate(hit_effect_prefab/*파티클 프리팹*/, hitInfo.point/*착탄지점 Vector3 좌표 반환*/, Quaternion.LookRotation(hitInfo.normal)/*착탄면의 수직 방향을 바라보고 있는 상태로 생성*/);
+            Destroy(clone, 2f);
         }
     }
 
