@@ -16,8 +16,13 @@ public class GunController : MonoBehaviour
 
     private AudioSource audioSource; //효과음 재생
 
+    //필요한 컴포넌트
+    private RaycastHit hitInfo; //레이저 충돌 정보 받아옴
+    [SerializeField] private Camera theCam; //총알 착탄지점 찾기 위함
+
     void Start()
     {
+        originPos = Vector3.zero; //초기화(0,0,0)
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -63,10 +68,17 @@ public class GunController : MonoBehaviour
         currentFireRate = currentGun.fireRate; //연사 속도 재계산
         currentGun.muzzleFlash.Play(); //총구 화염 효과 재생
         PlaySE(currentGun.fire_Sound); //발사 소리 출력
-
-        StopAllCoroutines();
+        Hit(); //착탄지점 계산
+        StopAllCoroutines(); //모든 코루틴 멈추기
         StartCoroutine(RetroActionCoroutine());
-        Debug.Log("총알 발사");
+    }
+
+    private void Hit() //착탄지점 계산
+    {
+        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitInfo, currentGun.range))
+        {
+            Debug.Log(hitInfo.transform.name);
+        }
     }
 
     private void TryReload() //재장전 시도

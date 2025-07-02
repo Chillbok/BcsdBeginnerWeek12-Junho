@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGun: {fileID: 138081950}
-  originPos: {x: 0, y: 0, z: 0}
+  theCam: {fileID: 330585545}
 --- !u!82 &75517790
 AudioSource:
   m_ObjectHideFlags: 0
