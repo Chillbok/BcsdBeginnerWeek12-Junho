@@ -48,7 +48,10 @@ public class GunController : MonoBehaviour
             if (currentGun.currentBulletCount > 0) //탄창 총알 개수가 0보다 많으면
                 Shoot(); //총알 발사
             else //탄창에 총알이 없으면
+            {
+                CancelFineSight(); //조준 취소
                 StartCoroutine(ReloadCoroutine()); //재장전 코루틴 실행
+            }
         }
     }
 
@@ -68,6 +71,7 @@ public class GunController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R) /*R 눌렀을 때*/ && !isReload /*재장전 중이 아닐 때*/ && currentGun.currentBulletCount < currentGun.reloadBulletCount /*현재 총알 개수가 탄창 크기보다 작을 때*/)
         {
+            CancelFineSight(); //조준 상태 풀기
             StartCoroutine(ReloadCoroutine()); //재장전 시작
         }
     }
@@ -106,10 +110,16 @@ public class GunController : MonoBehaviour
 
     private void TryFineSight() //정조준 시도
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && !isReload)
         {
-            FineSight();
+            FineSight(); //정조준 실행
         }
+    }
+
+    private void CancelFineSight() //조준 취소
+    {
+        if (isFineSightMode) //조준 중이면
+            FineSight();
     }
 
     private void FineSight()
