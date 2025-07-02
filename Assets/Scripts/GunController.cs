@@ -181,13 +181,6 @@ public class GunController : MonoBehaviour
                 currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, retroActionRecoilBack, 0.4f);
                 yield return null;
             }
-
-            //원위치
-            while (currentGun.transform.localPosition != originPos) //될때까지 반복
-            {
-                currentGun.transform.localPosition = Vector3.Lerp(currentGun.transform.localPosition, originPos, 0.1f);
-                yield return null;
-            }
         }
     }
 
