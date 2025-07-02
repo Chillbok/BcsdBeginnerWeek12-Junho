@@ -6373,6 +6373,7 @@ MonoBehaviour:
   lookSensitivity: 1
   cameraRotationLimit: 80
   theCamera: {fileID: 330585545}
+  theGunController: {fileID: 75517789}
 --- !u!54 &1607681442
 Rigidbody:
   m_ObjectHideFlags: 0

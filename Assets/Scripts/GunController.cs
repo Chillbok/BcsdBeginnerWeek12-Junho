@@ -116,7 +116,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    private void CancelFineSight() //조준 취소
+    public void CancelFineSight() //조준 취소
     {
         if (isFineSightMode) //조준 중이면
             FineSight();

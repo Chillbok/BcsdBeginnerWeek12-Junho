@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     //필요한 컴포넌트
     [SerializeField] private Camera theCamera;
     private Rigidbody myRigid;
+    [SerializeField] GunController theGunController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -155,6 +156,8 @@ public class PlayerController : MonoBehaviour
         //앉은 상태에서 달리기 시작하면 서 있는 상태로 변경
         if (isCrouch)
             Crouch();
+
+        theGunController.CancelFineSight(); //뛰기 시작하면 조준 해제
         isRun = true;
         applySpeed = runSpeed;
     }
