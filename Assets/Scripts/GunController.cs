@@ -34,7 +34,7 @@ public class GunController : MonoBehaviour
         GunFireRateCalc(); //발사 속도 계산
         TryFire(); //탄창에 총알 있으면 사격, 총알 없으면 재장전
         TryReload(); //직접 재장전 시도
-        TryFineSight(); //정조준 여부 확랴ㅜ
+        TryFineSight(); //정조준 여부 확인
     }
 
     private void GunFireRateCalc() //연사 속도 재계산

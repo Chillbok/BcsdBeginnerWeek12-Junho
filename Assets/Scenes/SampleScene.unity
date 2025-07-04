@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGun: {fileID: 138081950}
   theCam: {fileID: 330585545}
-  hit_effect_prefab: {fileID: 0}
+  hit_effect_prefab: {fileID: 4400814093861489646, guid: 3554a5acfc7c7883d82581f4fab207b5, type: 3}
 --- !u!82 &75517790
 AudioSource:
   m_ObjectHideFlags: 0
