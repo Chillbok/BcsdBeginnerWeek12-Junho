@@ -8,7 +8,7 @@ public class GunController : MonoBehaviour
     [SerializeField] private Gun currentGun; //현재 장착된 총
 
     private float currentFireRate; //현재 연사 속도 계산. 1초에 1씩 감소하고 0이 되면 발사
-    
+
     //상태변수들
     [HideInInspector] private bool isReload = false; //재장전 중인가?
     [HideInInspector] private bool isFineSightMode = false; //정조준 여부
@@ -223,5 +223,10 @@ public class GunController : MonoBehaviour
     {
         audioSource.clip = _clip;
         audioSource.Play();
+    }
+
+    public Gun GetGun()
+    {
+        return currentGun;
     }
 }
