@@ -1,7 +1,6 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private GameObject go_BulletHUD;
 
     //총알 개수 텍스트에 반영
-    [SerializeField] private TextMeshPro[] text_bullet;
+    [SerializeField] private TextMeshProUGUI[] text_bullet;
 
     void Update()
     {
