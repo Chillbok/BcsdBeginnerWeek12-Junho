@@ -218,9 +218,15 @@ public class PlayerController : MonoBehaviour
         if (!isRun && !isCrouch && isGround)
         {
             if (Vector3.Distance(lastPos, transform.position) >= 0.001f) //전 프레임 마지막 위치와 현재 위치가 0.01f 이상이라면
+            {
                 isWalk = true;
+                Debug.Log($"활성화");
+            }
             else
+            {
                 isWalk = false;
+                Debug.Log($"비활성화");
+            }
 
             theCrosshair.WalkingAnimation(isWalk);
             lastPos = transform.position;
