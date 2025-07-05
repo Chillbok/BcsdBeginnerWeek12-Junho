@@ -43,14 +43,14 @@ public class Crosshair : MonoBehaviour
 
     public float GetAccuracy()
     {
-        if (animator.GetBool("Walking")) //걸을 때
-            gunAccuracy = 0.06f;
-        else if (animator.GetBool("Crouching")) //앉아 있을 때
+        if (animator.GetBool("Crouching")) //앉아 있을 때
             gunAccuracy = 0.015f;
         else if (animator.GetBool("Running")) //달리는 중일 때
             gunAccuracy = 1f;
         else if (theGunController.GetFineSightMode()) //조준 중일 때
             gunAccuracy = 0.001f;
+        else if (animator.GetBool("Walking")) //걸을 때
+            gunAccuracy = 0.06f;
         else //가만히 서 있을 때
             gunAccuracy = 0.035f;
 

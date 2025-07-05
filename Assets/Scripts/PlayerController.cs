@@ -165,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
         theGunController.CancelFineSight(); //뛰기 시작하면 조준 해제
 
+        isWalk = false;
         isRun = true;
         theCrosshair.RunningAnimation(isRun);
         applySpeed = runSpeed;
@@ -216,21 +217,19 @@ public class PlayerController : MonoBehaviour
         float _moveDirX = Input.GetAxisRaw("Horizontal"); //왼쪽 오른쪽 움직임
         float _moveDirZ = Input.GetAxisRaw("Vertical"); //앞뒤 움직임
 
-        if (isGround == false) //달리기 중이거나, 땅에 닿지 않은 상태라면
+        if (isGround == false) //땅에 닿지 않은 상태
             theCrosshair.RunningAnimation(true);
 
-        if (!isRun && !isCrouch && isGround)
+        if (_moveDirX == 0 && _moveDirZ == 0) //움직임 입력을 하지 않았다면
         {
-            if (_moveDirX == 0 && _moveDirZ == 0) //전 프레임 마지막 위치와 현재 위치가 0.01f 이상이라면
-            {
-                isWalk = false;
-            }
-            else
-            {
-                isWalk = true;
-            }
-            theCrosshair.WalkingAnimation(isWalk);
+            isWalk = false;
         }
+        else //움직임 입력을 했다면
+        {
+            if (!isRun || !isCrouch || isGround) //움직임 입력을 했는데 달리기 중이 아니거나 앉아있지 않거나 땅 위에 있다면
+                isWalk = true;
+        }
+        theCrosshair.WalkingAnimation(isWalk);
     }
 
     //좌우 캐릭터 회전
