@@ -375,6 +375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentGun: {fileID: 138081950}
   theCam: {fileID: 330585545}
+  theCrosshair: {fileID: 1221967662}
   hit_effect_prefab: {fileID: 4400814093861489646, guid: 3554a5acfc7c7883d82581f4fab207b5, type: 3}
 --- !u!82 &75517790
 AudioSource:
@@ -498,13 +499,13 @@ MonoBehaviour:
   gunName: SubMacnineGun1
   range: 100
   accuracy: 0
-  fireRate: 0.2
+  fireRate: 0.05
   reloadTime: 2
   damage: 30
-  reloadBulletCount: 10
-  currentBulletCount: 10
+  reloadBulletCount: 25
+  currentBulletCount: 25
   maxBulletCount: 0
-  carryBulletCount: 23
+  carryBulletCount: 999
   retroActionForce: 0.3
   retroActionFineSightForce: 0.7
   fineSightOriginPos: {x: 0.5, y: 0.335, z: -0.585}

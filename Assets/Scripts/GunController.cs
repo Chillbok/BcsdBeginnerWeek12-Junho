@@ -17,9 +17,11 @@ public class GunController : MonoBehaviour
 
     private AudioSource audioSource; //효과음 재생
 
-    //필요한 컴포넌트
     private RaycastHit hitInfo; //레이저 충돌 정보 받아옴
+
+    //필요한 컴포넌트
     [SerializeField] private Camera theCam; //총알 착탄지점 찾기 위함
+    [SerializeField] private Crosshair theCrosshair;
 
     [SerializeField] private GameObject hit_effect_prefab; //피격 이펙트
 
@@ -67,6 +69,7 @@ public class GunController : MonoBehaviour
 
     private void Shoot() //발사 후 계산
     {
+        theCrosshair.FireAnimation();
         currentGun.currentBulletCount--;
         currentFireRate = currentGun.fireRate; //연사 속도 재계산
         currentGun.muzzleFlash.Play(); //총구 화염 효과 재생
