@@ -18,9 +18,6 @@ public class PlayerController : MonoBehaviour
     private bool isCrouch = false; //앉아있는가?
     private bool isGround = true; //땅에 있는가?
 
-    //움직임 체크 변수
-    private Vector3 lastPos; //전 프레임 플레이어 마지막 위치 기록
-
     //앉았을 때 얼마나 앉을지 결정하는 변수
     [SerializeField]
     private float crouchPosY;
@@ -124,7 +121,8 @@ public class PlayerController : MonoBehaviour
     {
         //아래 방향으로 콜라이더 크기보다 0.1f만큼 더 길게 Ray 발사, collider와 닿으면 true 반환
         isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
-        theCrosshair.RunningAnimation(!isGround);
+        if (isGround) //땅에 서 있다면
+            theCrosshair.RunningAnimation(false);
     }
 
     //점프 시도
@@ -215,23 +213,24 @@ public class PlayerController : MonoBehaviour
     //
     private void MoveCheck()
     {
+        float _moveDirX = Input.GetAxisRaw("Horizontal"); //왼쪽 오른쪽 움직임
+        float _moveDirZ = Input.GetAxisRaw("Vertical"); //앞뒤 움직임
+
+        if (isGround == false) //달리기 중이거나, 땅에 닿지 않은 상태라면
+            theCrosshair.RunningAnimation(true);
+
         if (!isRun && !isCrouch && isGround)
         {
-            if (Vector3.Distance(lastPos, transform.position) >= 0.001f) //전 프레임 마지막 위치와 현재 위치가 0.01f 이상이라면
+            if (_moveDirX == 0 && _moveDirZ == 0) //전 프레임 마지막 위치와 현재 위치가 0.01f 이상이라면
             {
-                isWalk = true;
-                Debug.Log($"활성화");
+                isWalk = false;
             }
             else
             {
-                isWalk = false;
-                Debug.Log($"비활성화");
+                isWalk = true;
             }
-
             theCrosshair.WalkingAnimation(isWalk);
-            lastPos = transform.position;
         }
-
     }
 
     //좌우 캐릭터 회전
