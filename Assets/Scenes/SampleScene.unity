@@ -498,7 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: SubMacnineGun1
   range: 100
-  accuracy: 0
+  accuracy: 0.01
   fireRate: 0.05
   reloadTime: 2
   damage: 30
@@ -6755,6 +6755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1174331058}
   go_CrosshairHUD: {fileID: 1174331056}
+  theGunController: {fileID: 75517789}
 --- !u!1001 &1239606759
 PrefabInstance:
   m_ObjectHideFlags: 0

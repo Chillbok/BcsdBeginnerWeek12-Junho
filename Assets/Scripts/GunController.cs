@@ -81,7 +81,16 @@ public class GunController : MonoBehaviour
 
     private void Hit() //착탄지점 계산
     {
-        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward, out hitInfo, currentGun.range))
+        float finalAccuracy = theCrosshair.GetAccuracy() + currentGun.accuracy; //최종 반동값
+        Vector3 gunSpray = new Vector3 //반동으로 더해줄 벡터 값
+        (
+            /*x축*/Random.Range(-finalAccuracy, finalAccuracy),
+            /*y축*/Random.Range(-finalAccuracy, finalAccuracy),
+            /*z축*/0
+        );
+
+        if (Physics.Raycast(theCam.transform.position, theCam.transform.forward +
+                gunSpray, out hitInfo, currentGun.range))
         {
             GameObject clone = Instantiate(hit_effect_prefab/*파티클 프리팹*/, hitInfo.point/*착탄지점 Vector3 좌표 반환*/, Quaternion.LookRotation(hitInfo.normal)/*착탄면의 수직 방향을 바라보고 있는 상태로 생성*/);
             Destroy(clone, 2f);
@@ -231,5 +240,10 @@ public class GunController : MonoBehaviour
     public Gun GetGun()
     {
         return currentGun;
+    }
+
+    public bool GetFineSightMode()
+    {
+        return isFineSightMode;
     }
 }
