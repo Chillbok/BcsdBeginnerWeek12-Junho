@@ -155,7 +155,8 @@ public class GunController : MonoBehaviour
     private void FineSight() //정조준 로직 가동
     {
         isFineSightMode = !isFineSightMode; //정조준 활성화
-        currentGun.anim.SetBool("FineSightMode", isFineSightMode);
+        currentGun.anim.SetBool("FineSightMode", isFineSightMode); //조준 애니메이션 적용
+        theCrosshair.FineSightAnimation(isFineSightMode); //조준점 투명하게 만드는 애니메이션
         if (isFineSightMode) //정조준 중일 때
         {
             StopAllCoroutines(); //기존 실행중인 모든 코루틴 멈춤
