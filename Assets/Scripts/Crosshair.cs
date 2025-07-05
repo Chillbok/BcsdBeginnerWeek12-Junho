@@ -10,8 +10,18 @@ public class Crosshair : MonoBehaviour
     //크로스헤어 비활성화를 위한 부모 객체.
     [SerializeField] GameObject go_CrosshairHUD;
 
-    void Update()
+    public void WalkingAnimation(bool _flag)
     {
-        
+        animator.SetBool("Walking", _flag);
+    }
+
+    public void RunningAnimation(bool _flag)
+    {
+        animator.SetBool("Running", _flag);
+    }
+
+    public void CrouchingAnimation(bool _flag)
+    {
+        animator.SetBool("Crouching", _flag);
     }
 }
