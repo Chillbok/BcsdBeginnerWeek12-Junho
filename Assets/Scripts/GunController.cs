@@ -13,7 +13,7 @@ public class GunController : MonoBehaviour
 
     //상태변수들
     [HideInInspector] private bool isReload = false; //재장전 중인가?
-    [HideInInspector] private bool isFineSightMode = false; //정조준 여부
+    [HideInInspector] public bool isFineSightMode = false; //정조준 여부
 
     private Vector3 originPos; //본래 포지션 값
 
@@ -56,7 +56,7 @@ public class GunController : MonoBehaviour
 
     private void TryFire() //발사 시도
     {
-        if (Input.GetButton("Fire1") && currentFireRate <= 0 && !isReload)
+        if (Input.GetButton("Fire1") && currentFireRate <= 0 && !isReload && !theCrosshair.IsRunning()) //발사 버튼 누르고, 연사 속도 가능할 때, 재장전 중이 아니라면, 그리고 달리기 애니메이션 출력 중이 아니라면
         {
             Fire();
         }
@@ -282,5 +282,11 @@ public class GunController : MonoBehaviour
         currentGun.transform.localPosition = Vector3.zero; //조준한 상태에서 총 바꾸면 좌표 바뀔 수 있음. 방지용.
         currentGun.gameObject.SetActive(true);
         isActivate = true;
+    }
+
+    public bool GetBoolJumping() //SMG 애니메이터의 Running bool 값 불러오기
+    {
+        bool jumping = currentGun.anim.GetBool("Jumping");
+        return jumping;
     }
 }

@@ -54,7 +54,6 @@ public class WeaponManager : MonoBehaviour
     {
         if (!isChangeWeapon)
         {
-            Debug.Log("ㅇㅇ");
             if (Input.GetKeyDown(KeyCode.Alpha1)) //숫자키 1 눌러서
             {
                 //무기 교체 실행(맨손)

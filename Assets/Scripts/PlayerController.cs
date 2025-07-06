@@ -124,6 +124,8 @@ public class PlayerController : MonoBehaviour
         isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
         if (isGround) //땅에 서 있다면
             theCrosshair.JumpingAnimation(false);
+        else //공중에 떠 있다면
+            theCrosshair.JumpingAnimation(true);
     }
 
     //점프 시도
@@ -138,8 +140,7 @@ public class PlayerController : MonoBehaviour
     //점프
     private void Jump()
     {
-        //앉은 상태에서 점프하면 서 있는 상태로 변경
-        if (isCrouch)
+        if (isCrouch) //앉은 상태에서 점프하면 서 있는 상태로 변경
             Crouch();
         myRigid.linearVelocity = transform.up * jumpForce;
     }
@@ -219,7 +220,7 @@ public class PlayerController : MonoBehaviour
         float _moveDirZ = Input.GetAxisRaw("Vertical"); //앞뒤 움직임
 
         if (isGround == false) //땅에 닿지 않은 상태
-            theCrosshair.RunningAnimation(true);
+            theCrosshair.JumpingAnimation(true);
 
         if (_moveDirX == 0 && _moveDirZ == 0) //움직임 입력을 하지 않았다면
         {

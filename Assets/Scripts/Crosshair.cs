@@ -19,14 +19,16 @@ public class Crosshair : MonoBehaviour
 
     public void RunningAnimation(bool _flag)
     {
-        WeaponManager.currentWeaponAnim.SetBool("Run", _flag); //무기
-        animator.SetBool("Running", _flag); //크로스헤어
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) //입력이 있다면
+        {
+            WeaponManager.currentWeaponAnim.SetBool("Run", _flag); //무기 달리기 애니메이션
+            animator.SetBool("Running", _flag); //크로스헤어 달리기 애니메이션
+        }
     }
 
     public void JumpingAnimation(bool _flag)
     {
-        WeaponManager.currentWeaponAnim.SetBool("Run", _flag); //무기
-        animator.SetBool("Running", _flag); //크로스헤어
+        animator.SetBool("Jumping", _flag); //크로스헤어
     }
 
     public void CrouchingAnimation(bool _flag)
@@ -53,7 +55,7 @@ public class Crosshair : MonoBehaviour
     {
         if (animator.GetBool("Crouching")) //앉아 있을 때
             gunAccuracy = 0.015f;
-        else if (animator.GetBool("Running")) //달리는 중일 때
+        else if (animator.GetBool("Running") || animator.GetBool("Jumping")) //달리는 중일 때
             gunAccuracy = 1f;
         else if (theGunController.GetFineSightMode()) //조준 중일 때
             gunAccuracy = 0.001f;
@@ -63,5 +65,10 @@ public class Crosshair : MonoBehaviour
             gunAccuracy = 0.035f;
 
         return gunAccuracy;
+    }
+
+    public bool IsRunning()
+    {
+        return animator.GetBool("Running");
     }
 }
