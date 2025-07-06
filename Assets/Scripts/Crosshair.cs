@@ -13,22 +13,30 @@ public class Crosshair : MonoBehaviour
 
     public void WalkingAnimation(bool _flag)
     {
-        animator.SetBool("Walking", _flag);
+        WeaponManager.currentWeaponAnim.SetBool("Walk", _flag); //무기
+        animator.SetBool("Walking", _flag); //크로스헤어
     }
 
     public void RunningAnimation(bool _flag)
     {
-        animator.SetBool("Running", _flag);
+        WeaponManager.currentWeaponAnim.SetBool("Run", _flag); //무기
+        animator.SetBool("Running", _flag); //크로스헤어
+    }
+
+    public void JumpingAnimation(bool _flag)
+    {
+        WeaponManager.currentWeaponAnim.SetBool("Run", _flag); //무기
+        animator.SetBool("Running", _flag); //크로스헤어
     }
 
     public void CrouchingAnimation(bool _flag)
     {
-        animator.SetBool("Crouching", _flag);
+        animator.SetBool("Crouching", _flag); //크로스헤어
     }
 
     public void FineSightAnimation(bool _flag)
     {
-        animator.SetBool("FineSight", _flag);
+        animator.SetBool("FineSight", _flag); //크로스헤어
     }
 
     public void FireAnimation()

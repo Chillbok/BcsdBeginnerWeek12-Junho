@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
         //아래 방향으로 콜라이더 크기보다 0.1f만큼 더 길게 Ray 발사, collider와 닿으면 true 반환
         isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
         if (isGround) //땅에 서 있다면
-            theCrosshair.RunningAnimation(false);
+            theCrosshair.JumpingAnimation(false);
     }
 
     //점프 시도

@@ -11,7 +11,7 @@ public class WeaponManager : MonoBehaviour
 
     //현재 무기의 애니메이션
     public static Transform currentWeapon;
-    public static Animator currentWeaponAnim;
+    public static Animator currentWeaponAnim; //애니메이터 감독
 
 
     //현재 무기의 타입
