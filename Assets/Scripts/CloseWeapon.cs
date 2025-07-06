@@ -1,8 +1,15 @@
+using System;
 using UnityEngine;
 
-public class Hand : MonoBehaviour
+public class CloseWeapon : MonoBehaviour
 {
-    public string handName; //너클이나 맨손을 구분
+    public string closeWeaponName; //근접 무기 이름
+
+    //웨폰 유형
+    public bool isHand; //맨손인가?
+    public bool isAxe; //도끼인가?
+    public bool isPickaxe; //곡괭이인가?
+
     public float range; //공격 범위
     public int damage; //공격력
     public float workSpeed; //작업 속도
