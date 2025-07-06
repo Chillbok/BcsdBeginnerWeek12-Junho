@@ -511,8 +511,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   limitPos: {x: 0.2, y: 0.1, z: 0}
-  fineSightLimitPos: {x: 0.1, y: 0.05, z: 0}
-  smoothSway: {x: 0.01, y: 0.05, z: 0}
+  fineSightLimitPos: {x: 0.005, y: 0.005, z: 0}
+  smoothSway: {x: 0.05, y: 0.03, z: 0}
   theGunController: {fileID: 75517789}
 --- !u!1 &138081948 stripped
 GameObject:

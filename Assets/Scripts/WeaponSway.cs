@@ -45,7 +45,7 @@ public class WeaponSway : MonoBehaviour
         float _moveX = Input.GetAxisRaw("Mouse X");
         float _moveY = Input.GetAxisRaw("Mouse Y");
 
-        if (theGunController.isFineSightMode) //정조준 상태가 아닐 때 무기 흔들림 구현
+        if (!theGunController.isFineSightMode) //정조준 상태 아닐 때 무기 흔들림 구현
         {
             currentPos.Set(
                 Mathf.Clamp(Mathf.Lerp(currentPos.x, -_moveX, smoothSway.x), -limitPos.x, limitPos.x),
