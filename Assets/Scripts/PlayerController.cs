@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
 
+
         //초기화
         applySpeed = walkSpeed;
         originPosY = theCamera.transform.localPosition.y; //상위 오브젝트 기준 위치

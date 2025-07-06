@@ -5,6 +5,8 @@ using UnityEngine.Rendering;
 
 public class GunController : MonoBehaviour
 {
+    public static bool isActivate = true;
+
     [SerializeField] private Gun currentGun; //현재 장착된 총
 
     private float currentFireRate; //현재 연사 속도 계산. 1초에 1씩 감소하고 0이 되면 발사
@@ -29,14 +31,21 @@ public class GunController : MonoBehaviour
     {
         originPos = Vector3.zero; //초기화(0,0,0)
         audioSource = GetComponent<AudioSource>();
+
+
+        WeaponManager.currentWeapon = currentGun.GetComponent<Transform>();
+        WeaponManager.currentWeaponAnim = currentGun.anim;
     }
 
     void Update()
     {
-        GunFireRateCalc(); //발사 속도 계산
-        TryFire(); //탄창에 총알 있으면 사격, 총알 없으면 재장전
-        TryReload(); //직접 재장전 시도
-        TryFineSight(); //정조준 여부 확인
+        if (isActivate)
+        {
+            GunFireRateCalc(); //발사 속도 계산
+            TryFire(); //탄창에 총알 있으면 사격, 총알 없으면 재장전
+            TryReload(); //직접 재장전 시도
+            TryFineSight(); //정조준 여부 확인
+        }
     }
 
     private void GunFireRateCalc() //연사 속도 재계산
@@ -103,6 +112,15 @@ public class GunController : MonoBehaviour
         {
             CancelFineSight(); //조준 상태 풀기
             StartCoroutine(ReloadCoroutine()); //재장전 시작
+        }
+    }
+
+    public void CancelReload()
+    {
+        if (isReload)
+        {
+            StopAllCoroutines();
+            isReload = false;
         }
     }
 
@@ -246,5 +264,23 @@ public class GunController : MonoBehaviour
     public bool GetFineSightMode()
     {
         return isFineSightMode;
+    }
+
+    public void GunChange(Gun _gun)
+    {
+        if (WeaponManager.currentWeapon != null)
+        {
+            WeaponManager.currentWeapon.gameObject.SetActive(false);
+        }
+
+
+        currentGun = _gun;
+        WeaponManager.currentWeapon = currentGun.GetComponent<Transform>();
+        WeaponManager.currentWeaponAnim = currentGun.anim;
+
+
+        currentGun.transform.localPosition = Vector3.zero; //조준한 상태에서 총 바꾸면 좌표 바뀔 수 있음. 방지용.
+        currentGun.gameObject.SetActive(true);
+        isActivate = true;
     }
 }
