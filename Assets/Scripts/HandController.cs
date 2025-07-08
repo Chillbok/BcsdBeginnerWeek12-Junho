@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class HandController : CloseWeaponController
 {
+    protected void Update()
+    {
+        if (isActivate)
+        {
+            TryAttack();
+        }
+    }
+
     protected override IEnumerator HitCoroutine()
     {
         while (isSwing)

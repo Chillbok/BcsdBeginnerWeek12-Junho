@@ -115,7 +115,7 @@ public class WeaponManager : MonoBehaviour
         }
         else if (_type == "HAND")
         {
-            theHandController.HandChange(handDictionary[_name]);
+            theHandController.CloseWeaponChange(handDictionary[_name]);
         }
     }
 }

@@ -8,21 +8,13 @@ public abstract class CloseWeaponController : MonoBehaviour
     public static bool isActivate = false;
 
     //현재 장착된 Hand형 타입 무기.
-    [SerializeField] protected CloseWeapon currentHand;
+    [SerializeField] protected CloseWeapon currentCloseWeapon;
 
     //공격중
     protected bool isAttack = false; //공격중이라면 true
     protected bool isSwing = false; //팔을 휘두르고 있는 중이라면 true
 
     protected RaycastHit hitInfo;
-
-    protected void Update()
-    {
-        if (isActivate)
-        {
-            TryAttack();
-        }
-    }
 
     protected void TryAttack()
     {
@@ -39,19 +31,19 @@ public abstract class CloseWeaponController : MonoBehaviour
     protected IEnumerator AttackCoroutine() //공격 관련 시간 조절 코루틴
     {
         isAttack = true; //공격 시작
-        currentHand.anim.SetTrigger("Attack");
+        currentCloseWeapon.anim.SetTrigger("Attack");
 
-        yield return new WaitForSeconds(currentHand.attackDelayA);
+        yield return new WaitForSeconds(currentCloseWeapon.attackDelayA);
         isSwing = true;
 
         StartCoroutine(HitCoroutine());
 
         //공격 활성화 시점
 
-        yield return new WaitForSeconds(currentHand.attackDelayB);
+        yield return new WaitForSeconds(currentCloseWeapon.attackDelayB);
         isSwing = false;
 
-        yield return new WaitForSeconds(currentHand.attackDelay - currentHand.attackDelayA - currentHand.attackDelayB);
+        yield return new WaitForSeconds(currentCloseWeapon.attackDelay - currentCloseWeapon.attackDelayA - currentCloseWeapon.attackDelayB);
         isAttack = false; //공격 종료
     }
 
@@ -60,26 +52,26 @@ public abstract class CloseWeaponController : MonoBehaviour
 
     protected bool CheckObject() //Ray를 이용해서 전방의 적 확인
     {
-        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, currentHand.range))
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, currentCloseWeapon.range))
         {
             return true; //어떤 대상이 충돌했다면
         }
         return false; //어떤 대상도 충돌하지 않았다면
     }
 
-    public void HandChange(CloseWeapon _hand)
+    public void CloseWeaponChange(CloseWeapon _closeWeapon)
     {
         if (WeaponManager.currentWeapon != null)
             WeaponManager.currentWeapon.gameObject.SetActive(false);
 
 
-        currentHand = _hand;
-        WeaponManager.currentWeapon = currentHand.GetComponent<Transform>();
-        WeaponManager.currentWeaponAnim = currentHand.anim;
+        currentCloseWeapon = _closeWeapon;
+        WeaponManager.currentWeapon = currentCloseWeapon.GetComponent<Transform>();
+        WeaponManager.currentWeaponAnim = currentCloseWeapon.anim;
 
 
-        currentHand.transform.localPosition = Vector3.zero; //조준한 상태에서 총 바꾸면 좌표 바뀔 수 있음. 방지용.
-        currentHand.gameObject.SetActive(true);
+        currentCloseWeapon.transform.localPosition = Vector3.zero; //조준한 상태에서 총 바꾸면 좌표 바뀔 수 있음. 방지용.
+        currentCloseWeapon.gameObject.SetActive(true);
         isActivate = true;
     }
 }
