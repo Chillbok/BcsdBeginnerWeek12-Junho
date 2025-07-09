@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class AxeController : CloseWeaponController
 {
+    //활성화 여부
+    public static bool isActivate = true;
+
+    void Start()
+    {
+        WeaponManager.currentWeapon = currentCloseWeapon.GetComponent<Transform>();
+        WeaponManager.currentWeaponAnim = currentCloseWeapon.anim;
+    }
 
     protected void Update()
     {
@@ -23,5 +31,11 @@ public class AxeController : CloseWeaponController
             }
             yield return null;
         }
+    }
+
+    public override void CloseWeaponChange(CloseWeapon _closeWeapon)
+    {
+        base.CloseWeaponChange(_closeWeapon);
+        isActivate = true;
     }
 }

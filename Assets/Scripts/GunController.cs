@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class GunController : MonoBehaviour
 {
-    public static bool isActivate = true;
+    public static bool isActivate = false;
 
     [SerializeField] private Gun currentGun; //현재 장착된 총
 
@@ -31,10 +31,6 @@ public class GunController : MonoBehaviour
     {
         originPos = Vector3.zero; //초기화(0,0,0)
         audioSource = GetComponent<AudioSource>();
-
-
-        WeaponManager.currentWeapon = currentGun.GetComponent<Transform>();
-        WeaponManager.currentWeaponAnim = currentGun.anim;
     }
 
     void Update()

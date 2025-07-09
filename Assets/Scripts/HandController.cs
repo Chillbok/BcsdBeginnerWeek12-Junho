@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class HandController : CloseWeaponController
 {
+    //활성화 여부
+    public static bool isActivate = false;
+
     protected void Update()
     {
         if (isActivate)
