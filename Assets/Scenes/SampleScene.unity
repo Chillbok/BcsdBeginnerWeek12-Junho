@@ -498,8 +498,11 @@ MonoBehaviour:
   - {fileID: 138081950}
   hands:
   - {fileID: 1631150749}
+  axes:
+  - {fileID: 2733006923224315781}
   theGunController: {fileID: 75517789}
   theHandController: {fileID: 75517788}
+  theAxeController: {fileID: 75517793}
 --- !u!114 &75517792
 MonoBehaviour:
   m_ObjectHideFlags: 0

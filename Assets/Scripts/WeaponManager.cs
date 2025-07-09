@@ -26,15 +26,18 @@ public class WeaponManager : MonoBehaviour
     //무기 종류들 전부 관리
     [SerializeField] private Gun[] guns;
     [SerializeField] private CloseWeapon[] hands;
+    [SerializeField] private CloseWeapon[] axes;
 
 
     //관리 차원에서 쉽게 무기 접근이 가능하도록 만듦.
     private Dictionary<string, Gun> gunDictionary = new Dictionary<string, Gun>();
     private Dictionary<string, CloseWeapon> handDictionary = new Dictionary<string, CloseWeapon>();
+    private Dictionary<string, CloseWeapon> axeDictionary = new Dictionary<string, CloseWeapon>();
 
 
     [SerializeField] GunController theGunController;
     [SerializeField] HandController theHandController;
+    [SerializeField] AxeController theAxeController;
 
 
     void Start()
@@ -46,6 +49,10 @@ public class WeaponManager : MonoBehaviour
         for (int i = 0; i < hands.Length; i++)
         {
             handDictionary.Add(hands[i].closeWeaponName, hands[i]);
+        }
+        for (int i = 0; i < axes.Length; i++)
+        {
+            axeDictionary.Add(axes[i].closeWeaponName, axes[i]);
         }
     }
 
@@ -65,6 +72,12 @@ public class WeaponManager : MonoBehaviour
                 //무기 교체 실행(서브머신건)
                 Debug.Log("숫자키 2 누름");
                 StartCoroutine(ChangeWeaponCoroutine("GUN", "SubMacnineGun1"));
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3)) //숫자키 3 눌러서
+            {
+                //무기 교체 실행(Axe)
+                Debug.Log("숫자키 3 누름");
+                StartCoroutine(ChangeWeaponCoroutine("AXE", "Axe"));
             }
         }
     }
@@ -103,6 +116,9 @@ public class WeaponManager : MonoBehaviour
             case "HAND":
                 HandController.isActivate = false;
                 break;
+            case "AXE":
+                AxeController.isActivate = false;
+                break;
         }
     }
 
@@ -116,6 +132,10 @@ public class WeaponManager : MonoBehaviour
         else if (_type == "HAND")
         {
             theHandController.CloseWeaponChange(handDictionary[_name]);
+        }
+        else if (_type == "AXE")
+        {
+            theAxeController.CloseWeaponChange(axeDictionary[_name]);
         }
     }
 }
