@@ -1,3 +1,5 @@
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Rock : MonoBehaviour
@@ -9,9 +11,12 @@ public class Rock : MonoBehaviour
     //필요한 게임 오브젝트
     [SerializeField] private GameObject go_rock; //일반 바위
     [SerializeField] private GameObject go_debris; //깨진 바위
+    [SerializeField] private GameObject go_effectPrefabs; //채굴 이펙트
 
     public void Mining()
     {
+        var clone = Instantiate(go_effectPrefabs, col.bounds.center, Quaternion.identity);
+        Destroy(clone, destroyTime);
         Debug.Log("mining 작동");
         hp--;
         if (hp <= 0)

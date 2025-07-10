@@ -119,63 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &28566202
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1866815180}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -133.07
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -17
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 13.98
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.000000021855694
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-      propertyPath: m_Name
-      value: Rock
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
 --- !u!1 &62218050
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +506,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100209624}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -616,7 +559,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116000495}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -729,7 +672,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158162920}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -842,11 +785,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
---- !u!4 &179875591 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5837663e122925c7ba16d9ba3a502ccd, type: 3}
-  m_PrefabInstance: {fileID: 28566202}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &224961239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6478145602353522747, guid: 600e4c6be16226444a06a9ec5e3e2095, type: 3}
@@ -1317,7 +1255,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363376964}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1735,7 +1673,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540280448}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1788,7 +1726,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620132918}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1930,7 +1868,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660993025}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2038,7 +1976,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776577905}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2091,7 +2029,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785435516}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2154,7 +2092,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802402461}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2288,7 +2226,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913681309}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2501,7 +2439,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020758341}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -7446,7 +7384,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142193434}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -7562,7 +7500,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202671554}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -7615,7 +7553,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217489594}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -7787,7 +7725,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231571157}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -8013,7 +7951,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331851219}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -8066,7 +8004,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342130888}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -8617,7 +8555,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677355693}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -8670,7 +8608,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1679665550}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -8798,7 +8736,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687108608}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -8856,7 +8794,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784428447}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -8914,7 +8852,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1842854086}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -9054,11 +8992,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1263e682d23ece6608e566121f0a84e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 3
   destroyTime: 5
   col: {fileID: 1863438544}
   go_rock: {fileID: 789791462}
   go_debris: {fileID: 2105421285}
+  go_effectPrefabs: {fileID: 574123152593079095, guid: bc3f4494e5c6cb90c8a81ef52f69cd5c, type: 3}
 --- !u!1 &1866815179
 GameObject:
   m_ObjectHideFlags: 0
@@ -9093,7 +9032,6 @@ Transform:
   - {fileID: 1701722259}
   - {fileID: 449526251}
   - {fileID: 1786664460}
-  - {fileID: 179875591}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1946472293 stripped
@@ -9109,7 +9047,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946472293}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -9162,7 +9100,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946474339}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -14554,7 +14492,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122851822}
   serializedVersion: 4
-  m_Mass: 5
+  m_Mass: 0.1
   m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
