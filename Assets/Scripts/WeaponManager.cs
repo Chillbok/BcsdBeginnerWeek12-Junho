@@ -8,20 +8,16 @@ public class WeaponManager : MonoBehaviour
     //무기 중복 교체 실행 방지
     public static bool isChangeWeapon = false; //공유 자원. 다른 스크립트에서 해당 변수를 수정하면 동일하게 적용됨. 굳이 클래스 선언을 하지 않아도 다른 스크립트에서 불러와서 사용 가능.
 
-
     //현재 무기의 애니메이션
     public static Transform currentWeapon;
     public static Animator currentWeaponAnim; //애니메이터 감독
 
-
     //현재 무기의 타입
     [SerializeField] private string currentWeaponType;
-
 
     //무기 교체 딜레이
     [SerializeField] private float changeWeaponDelayTime;
     [SerializeField] private float changeWeaponEndDelayTime;
-
 
     //무기 종류들 전부 관리
     [SerializeField] private Gun[] guns;
@@ -29,19 +25,16 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private CloseWeapon[] axes;
     [SerializeField] private CloseWeapon[] pickaxes;
 
-
     //관리 차원에서 쉽게 무기 접근이 가능하도록 만듦.
     private Dictionary<string, Gun> gunDictionary = new Dictionary<string, Gun>();
     private Dictionary<string, CloseWeapon> handDictionary = new Dictionary<string, CloseWeapon>();
     private Dictionary<string, CloseWeapon> axeDictionary = new Dictionary<string, CloseWeapon>();
     private Dictionary<string, CloseWeapon> pickaxeDictionary = new Dictionary<string, CloseWeapon>();
 
-
     [SerializeField] GunController theGunController;
     [SerializeField] HandController theHandController;
     [SerializeField] AxeController theAxeController;
     [SerializeField] PickaxeController thePickaxeController;
-
 
     void Start()
     {
@@ -63,7 +56,6 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         if (!isChangeWeapon)
@@ -71,25 +63,21 @@ public class WeaponManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1)) //숫자키 1 눌러서
             {
                 //무기 교체 실행(맨손)
-                Debug.Log("숫자키 1 누름");
                 StartCoroutine(ChangeWeaponCoroutine("HAND", "맨손"));
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2)) //숫자키 2 눌러서
             {
                 //무기 교체 실행(서브머신건)
-                Debug.Log("숫자키 2 누름");
                 StartCoroutine(ChangeWeaponCoroutine("GUN", "SubMacnineGun1"));
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3)) //숫자키 3 눌러서
             {
                 //무기 교체 실행(Axe)
-                Debug.Log("숫자키 3 누름");
                 StartCoroutine(ChangeWeaponCoroutine("AXE", "Axe"));
             }
             else if (Input.GetKeyDown(KeyCode.Alpha4)) //숫자키 4 눌러서
             {
                 //무기 교체 실행(Pickaxe)
-                Debug.Log("숫자키 4 누름");
                 StartCoroutine(ChangeWeaponCoroutine("PICKAXE", "Pickaxe"));
             }
         }
@@ -155,7 +143,7 @@ public class WeaponManager : MonoBehaviour
         }
         else if (_type == "PICKAXE")
         {
-            theAxeController.CloseWeaponChange(pickaxeDictionary[_name]);
+            thePickaxeController.CloseWeaponChange(pickaxeDictionary[_name]);
         }
     }
 }

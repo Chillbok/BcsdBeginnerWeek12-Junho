@@ -12,6 +12,7 @@ public class Rock : MonoBehaviour
 
     public void Mining()
     {
+        Debug.Log("mining 작동");
         hp--;
         if (hp <= 0)
             Destruction();
@@ -21,8 +22,11 @@ public class Rock : MonoBehaviour
     {
         col.enabled = false; //기존 바위 비활성화
         Destroy(go_rock); //일반 바위 삭제
+        Debug.Log("돌 삭제");
+        go_rock.SetActive(false);
 
         go_debris.SetActive(true); //깨진 바위 활성화
+        Debug.Log("부서진 돌 활성화");
         Destroy(go_debris, destroyTime); //destroyTime만큼 시간 지나면 깨진 바위도 삭제
     }
 }
