@@ -15,15 +15,15 @@ public class Rock : MonoBehaviour
     [SerializeField] private GameObject go_debris; //깨진 바위
     [SerializeField] private GameObject go_effectPrefabs; //채굴 이펙트
 
-    [Header("사운드 이펙트")]
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip effect_sound; //곡괭이 내려칠 때 사운드 이펙트
-    [SerializeField] AudioClip effect_sound2; //돌 부서질 때 사운드 이펙트
+    [Header("필요한 사운드")]
+    //필요한 사운드 이름
+    [SerializeField] private string strike_Sound;
+    [SerializeField] private string destroy_Sound;
 
     public void Mining()
     {
-        audioSource.clip = effect_sound;
-        audioSource.Play();
+        SoundManager.instance.PlaySE(strike_Sound);
+
         var clone = Instantiate(go_effectPrefabs, col.bounds.center, Quaternion.identity);
         Destroy(clone, destroyTime);
         hp--; //돌 hp 감소
@@ -33,8 +33,7 @@ public class Rock : MonoBehaviour
 
     private void Destruction()
     {
-        audioSource.clip = effect_sound2; //돌 부서지면 나는 소리
-        audioSource.Play();
+        SoundManager.instance.PlaySE(destroy_Sound);
         col.enabled = false; //기존 바위 비활성화
         Destroy(go_rock); //일반 바위 삭제
         go_rock.SetActive(false);
